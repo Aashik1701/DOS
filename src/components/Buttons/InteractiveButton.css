@@ -1,0 +1,62 @@
+.interactive-button {
+    position: relative;
+    display: inline-block;
+    padding: 0.25rem; /* p-px */
+    font-weight: 600; /* font-semibold */
+    line-height: 1.5; /* leading-6 */
+    color: white;
+    background-color: #1f2937; /* bg-gray-800 */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* shadow-2xl */
+    cursor: pointer;
+    border-radius: 0.75rem; /* rounded-xl */
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .interactive-button:hover {
+    transform: scale(1.05);
+  }
+  
+  .interactive-button:active {
+    transform: scale(0.95);
+  }
+  
+  .gradient-background {
+    position: absolute;
+    inset: 0;
+    border-radius: 0.75rem; /* rounded-xl */
+    background: linear-gradient(to right, #38b2ac, #4299e1, #805ad5); /* from-teal-400 via-blue-500 to-purple-500 */
+    padding: 2px; /* p-[2px] */
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+  
+  .group:hover .gradient-background {
+    opacity: 1;
+  }
+  
+  .button-content {
+    position: relative;
+    z-index: 10;
+    display: block;
+    padding: 0.75rem 1.5rem; /* px-6 py-3 */
+    border-radius: 0.75rem; /* rounded-xl */
+    background-color: #2d3748; /* bg-gray-950 */
+  }
+  
+  .button-text {
+    transition: transform 0.5s;
+  }
+  
+  .group:hover .button-text {
+    transform: translateX(0.25rem); /* group-hover:translate-x-1 */
+  }
+  
+  .button-icon {
+    width: 1.5rem; /* w-6 */
+    height: 1.5rem; /* h-6 */
+    transition: transform 0.5s;
+  }
+  
+  .group:hover .button-icon {
+    transform: translateX(0.25rem); /* group-hover:translate-x-1 */
+  }

@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import './Header.css';
+//import InteractiveButton from '../Buttons/InteractiveButton';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -67,4 +68,4 @@ const Header = () => {
   );
 };
 
-export default Header;``
+export default Header;
