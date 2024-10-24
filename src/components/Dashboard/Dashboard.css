@@ -240,14 +240,16 @@
     }
     
     .modal {
+      background-color: #ffffff;
+      color: #000000;
       position: absolute;
-      top: 40px;
-      left: 50%;
+      top: 150px;
+      left: 64%;
       transform: translateX(-50%);
       z-index: 1000;
       width: 400px;
       padding: 20px;
-      border: 1px solid #ccc;
+      border: 1px solid #9d4444;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }

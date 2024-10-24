@@ -166,18 +166,20 @@ const Dashboard = () => {
         style={{
           overlay: {
             position: 'absolute',
-            top: '40px',
-            left: '50%',
+            top: '120px',
+            left: '80%',
             transform: 'translateX(-50%)',
             zIndex: 1000,
           },
           content: {
+            backgroundColor: 'white',
+            color:'black',
             position: 'absolute',
             top: '40px',
             left: '50%',
             transform: 'translateX(-50%)',
             zIndex: 1000,
-            width: '400px',
+            width: '300px',
             padding: '20px',
             border: '1px solid #ccc',
             borderRadius: '10px',
@@ -216,6 +218,7 @@ const Dashboard = () => {
             Show Source Distribution
           </label>
         </div>
+        <br></br>
         <button onClick={handleModalClose}>Close</button>
       </Modal>
 
