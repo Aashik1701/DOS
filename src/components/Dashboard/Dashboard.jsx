@@ -163,8 +163,29 @@ const Dashboard = () => {
         contentLabel="Settings Modal"
         className="modal"
         overlayClassName="overlay"
+        style={{
+          overlay: {
+            position: 'absolute',
+            top: '40px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 1000,
+          },
+          content: {
+            position: 'absolute',
+            top: '40px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 1000,
+            width: '400px',
+            padding: '20px',
+            border: '1px solid #ccc',
+            borderRadius: '10px',
+            boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
+          },
+        }}
       >
-        <h2>Settings</ h2>
+        <h2>Settings</h2>
         <div className="settings-option">
           <label>
             <input
@@ -195,7 +216,7 @@ const Dashboard = () => {
             Show Source Distribution
           </label>
         </div>
-        <button onClick={() => setShowSettings(false)}>Close</button>
+        <button onClick={handleModalClose}>Close</button>
       </Modal>
 
       {/* Real-Time Monitoring Section */}
