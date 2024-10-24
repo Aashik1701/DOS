@@ -1,0 +1,48 @@
+.animated-dashboard-button {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    font-size: 16px;
+    background-color: #007bff; /* Dashboard button color */
+    border-radius: 5px; /* Rounded corners */
+    font-weight: 600;
+    color: #ffffff; /* Text color */
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  }
+  
+  .animated-dashboard-button span:last-child {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background-color: #2196F3; /* Animation color */
+    border-radius: 50%;
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.320, 1);
+  }
+  
+  .animated-dashboard-button span:first-child {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .animated-dashboard-button:hover {
+    box-shadow: 0 0 0 5px rgba(33, 150, 243, 0.6);
+    color: #ffffff;
+  }
+  
+  .animated-dashboard-button:active {
+    transform: scale(0.95);
+  }
+  
+  .animated-dashboard-button:hover span:last-child {
+    width: 150px;
+    height: 150px;
+    opacity: 1;
+  }

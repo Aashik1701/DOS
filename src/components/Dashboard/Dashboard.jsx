@@ -1,9 +1,45 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
+import Modal from 'react-modal';
 import { LineChart, Line, PieChart, Pie, Cell, ResponsiveContainer, XAxis, YAxis, Tooltip, Legend, AreaChart, Area, CartesianGrid } from 'recharts';
 import { AlertTriangle, Bell, AlertCircle, ThermometerSun, Droplets, Eye, Timer, Settings, Download } from 'lucide-react';
 import './Dashboard.css';
 
+Modal.setAppElement('#root');
+
 const Dashboard = () => {
+  const dashboardRef = useRef();
+  const [showSettings, setShowSettings] = useState(false);
+  const [showWaterUsage, setShowWaterUsage] = useState(true);
+  const [showQualityMetrics, setShowQualityMetrics] = useState(true);
+  const [showSourceDistribution, setShowSourceDistribution] = useState(true);
+  const [currentTime, setCurrentTime] = useState('');
+
+  const exportToPDF = async () => {
+    const element = dashboardRef.current;
+    const canvas = await html2canvas(element);
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new jsPDF();
+    const imgWidth = 190;
+    const pageHeight = pdf.internal.pageSize.height;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    let heightLeft = imgHeight;
+    let position = 0;
+
+    pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+    heightLeft -= pageHeight;
+
+    while (heightLeft >= 0) {
+      position = heightLeft - imgHeight;
+      pdf.addPage();
+      pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+    }
+
+    pdf.save('dashboard.pdf');
+  };
+
   // State for sensor readings and alerts
   const [sensorData, setSensorData] = useState({
     pH: 7.2,
@@ -51,6 +87,14 @@ const Dashboard = () => {
     { time: '20:00', pH: 7.1, turbidity: 2.4, dissolvedOxygen: 7.0, temperature: 23 }
   ];
 
+  const handleSettingsClick = () => {
+    setShowSettings(true);
+  };
+
+  const handleModalClose = () => {
+    setShowSettings(false);
+  };
+
   // Simulate real-time updates
   useEffect(() => {
     const interval = setInterval(() => {
@@ -78,82 +122,149 @@ const Dashboard = () => {
     }
   }, [sensorData]);
 
+  useEffect(() => {
+    const currentTimeInterval = setInterval(() => {
+      const date = new Date();
+      const day = date.toLocaleDateString('en-US', { weekday: 'long' });
+      const month = date.toLocaleDateString('en-US', { month: 'short' });
+      const year = date.getFullYear();
+      const hours = date.getHours() % 12 === 0 ? 12 : date.getHours() % 12;
+      const minutes = date.getMinutes();
+      const seconds = date.getSeconds();
+      const ampm = date.getHours() >= 12 ? 'PM' : 'AM';
+
+      setCurrentTime(`${date.getDate()} ${day} ${month} ${year} - ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${ampm}`);
+    }, 1000);
+
+    return () => clearInterval(currentTimeInterval);
+  }, []);
+
   return (
-    <div className="dashboard">
-      {/* HeaderSection */}
+    <div className="dashboard" ref={dashboardRef}>
+      {/* Header Section */}
       <div className="dashboard-header">
         <h1>Grey Water Management Dashboard</h1>
         <div className="header-actions">
-          <button className="action-button">
-            <Settings size={20} />
-            Settings
-          </button>
-          <button className="action-button">
+          <span>{currentTime}</span>
+          <button className="action-button" onClick={exportToPDF}>
             <Download size={20} />
-            Export Data
+            Export the Data
+          </button>
+          <button onClick={handleSettingsClick}>
+            <Settings size={24} />
           </button>
         </div>
       </div>
 
+      {/* Settings Modal */}
+      <Modal
+        isOpen={showSettings}
+        onRequestClose={handleModalClose}
+        contentLabel="Settings Modal"
+        className="modal"
+        overlayClassName="overlay"
+      >
+        <h2>Settings</ h2>
+        <div className="settings-option">
+          <label>
+            <input
+              type="checkbox"
+              checked={showWaterUsage}
+              onChange={() => setShowWaterUsage(!showWaterUsage)}
+            />
+            Show Water Usage
+          </label>
+        </div>
+        <div className="settings-option">
+          <label>
+            <input
+              type="checkbox"
+              checked={showQualityMetrics}
+              onChange={() => setShowQualityMetrics(!showQualityMetrics)}
+            />
+            Show Water Quality Metrics
+          </label>
+        </div>
+        <div className="settings-option">
+          <label>
+            <input
+              type="checkbox"
+              checked={showSourceDistribution}
+              onChange={() => setShowSourceDistribution(!showSourceDistribution)}
+            />
+            Show Source Distribution
+          </label>
+        </div>
+        <button onClick={() => setShowSettings(false)}>Close</button>
+      </Modal>
+
       {/* Real-Time Monitoring Section */}
       <div className="monitoring-grid">
-        <div className="sensor-card">
-          <div className="sensor-header">
-            <Droplets size={24} />
-            <h3>pH Level</h3>
+        {showWaterUsage && (
+          <div className="sensor-card">
+            <div className="sensor-header">
+              <Droplets size={24} />
+              <h3>pH Level</h3>
+            </div>
+            <div className="sensor-value">
+              <span className={`value ${sensorData.pH > 7.5 ? 'warning' : ''}`}>
+                {sensorData.pH}
+              </span>
+              <span className="unit">pH</span>
+            </div>
+            <div className="threshold-indicator">
+              Threshold: 7.5 pH
+            </div>
           </div>
-          <div className="sensor-value">
-            <span className={`value ${sensorData.pH > 7.5 ? 'warning' : ''}`}>
-              {sensorData.pH}
-            </span>
-            <span className="unit">pH</span>
-          </div>
-          <div className="threshold-indicator">
-            Threshold: 7.5 pH
-          </div>
-        </div>
+        )}
 
-        <div className="sensor-card">
-          <div className="sensor-header">
-            <Eye size={24} />
-            <h3>Turbidity</h3>
+        {showQualityMetrics && (
+          <div className="sensor-card">
+            <div className="sensor-header">
+              <Eye size={24} />
+              <h3>Turbidity</h3>
+            </div>
+            <div className="sensor-value">
+              <span className="value">{sensorData.turbidity}</span>
+              <span className="unit">NTU</span>
+            </div>
+            <div className="threshold-indicator">
+              Threshold: 5.0 NTU
+            </div>
           </div>
-          <div className="sensor-value">
-            <span className="value">{sensorData.turbidity}</span>
-            <span className="unit">NTU</span>
-          </div>
-          <div className="threshold-indicator">
-            Threshold: 5.0 NTU
-          </div>
-        </div>
+        )}
 
-        <div className="sensor-card">
-          <div className="sensor-header">
-            <ThermometerSun size={24} />
-            <h3>Temperature</h3>
+        {showQualityMetrics && (
+          <div className="sensor-card">
+            <div className="sensor-header">
+              <ThermometerSun size={24} />
+              <h3>Temperature</h3>
+            </div>
+            <div className="sensor-value">
+              <span className="value">{sensorData.temperature}</span>
+              <span className="unit">°C</span>
+            </div>
+            <div className="threshold-indicator">
+              Threshold: 30°C
+            </div>
           </div>
-          <div className="sensor-value">
-            <span className="value">{sensorData.temperature}</span>
-            <span className="unit">°C</span>
-          </div>
-          <div className="threshold-indicator">
-            Threshold: 30°C
-          </div>
-        </div>
+        )}
 
-        <div className="sensor-card">
-          <div className="sensor-header">
-            <Timer size={24} />
-            <h3>Dissolved Oxygen</h3>
+        {showQualityMetrics && (
+          <div className="sensor-card">
+            <div className="sensor-header">
+              <Timer size={24} />
+              <h3>Dissolved Oxygen</h3>
+            </div>
+            <div className="sensor-value">
+              <span className="value">{sensorData.dissolvedOxygen}</span>
+              <span className="unit">mg/L</span>
+            </div>
+            <div className="threshold-indicator">
+              Threshold: 5.0 mg/L
+            </div>
           </div>
-          <div className="sensor-value">
-            <span className="value">{sensorData.dissolvedOxygen}</span>
-            <span className="unit">mg/L</span>
-          </div>
-          <div className="threshold-indicator">
-            Threshold: 5.0 mg/L
-          </div>
-        </div>
+        )}
       </div>
 
       {/* Trends and Analytics Section */}
@@ -174,43 +285,47 @@ const Dashboard = () => {
           </ResponsiveContainer>
         </div>
 
-        <div className="dashboard-card">
-          <h2>Water Usage Overview</h2>
-          <ResponsiveContainer width="100%" height={300}>
-            <LineChart data={waterUsageData}>
-              <XAxis dataKey="date" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Line type="monotone" dataKey="laundry" stroke="#3B82F6" />
-              <Line type="monotone" dataKey="shower" stroke="#10B981" />
-              <Line type="monotone" dataKey="sink" stroke="#F59E0B" />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
+        {showWaterUsage && (
+          <div className="dashboard-card">
+            <h2>Water Usage Overview</h2>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={waterUsageData}>
+                <XAxis dataKey="date" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line type="monotone" dataKey="laundry" stroke="#3B82F6" />
+                <Line type="monotone" dataKey="shower" stroke="#10B981" />
+                <Line type="monotone" dataKey="sink" stroke="# F59E0B" />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        )}
 
-        <div className="dashboard-card">
-          <h2>Source Distribution</h2>
-          <ResponsiveContainer width="100%" height={300}>
-            <PieChart>
-              <Pie
-                data={sourceDistribution}
-                dataKey="value"
-                nameKey="name"
-                cx="50%"
-                cy="50%"
-                outerRadius={80}
-                label
-              >
-                {sourceDistribution.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
-                ))}
-              </Pie>
-              <Tooltip />
-              <Legend />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
+        {showSourceDistribution && (
+          <div className="dashboard-card">
+            <h2>Source Distribution</h2>
+            <ResponsiveContainer width="100%" height={300}>
+              <PieChart>
+                <Pie
+                  data={sourceDistribution}
+                  dataKey="value"
+                  nameKey="name"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={80}
+                  label
+                >
+                  {sourceDistribution.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+        )}
 
         {/* Alerts and Notifications Panel */}
         <div className="dashboard-card">
@@ -242,7 +357,7 @@ const Dashboard = () => {
           <div className="maintenance-list">
             <div className="maintenance-item">
               <Timer size={20} />
-              <div className="maintenance-details ">
+              <div className="maintenance-details">
                 <p>Filter Replacement</p>
                 <span>Due in 2 days</span>
               </div>
@@ -258,7 +373,7 @@ const Dashboard = () => {
         </div>
       </div>
     </div>
-    );
-}
+  );
+};
 
 export default Dashboard;
