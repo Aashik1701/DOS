@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import './Header.css';
-//import InteractiveButton from '../Buttons/InteractiveButton';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,6 +9,8 @@ const Header = () => {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  const navItems = ['Home', 'Features', 'How it Works', 'Contact Us', 'Login'];
 
   return (
     <header className="header">
@@ -27,41 +28,43 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="desktop-nav">
-            {['Home', 'Features', 'How it Works', 'Contact Us', 'Login'].map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
-                className="nav-link"
-              >
-                {item}
-              </a>
-            ))}
+            <ul className="nav-list">
+              {navItems.map((item) => (
+                <li key={item} className="nav-item">
+                  <a
+                    href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
+                    className="nav-link"
+                  >
+                    {item}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </nav>
 
           {/* Mobile menu button */}
           <div className="mobile-menu-button">
             <button onClick={toggleMenu}>
-              {isOpen ? (
-                <X size={24} />
-              ) : (
-                <Menu size={24} />
-              )}
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
         <div className={`mobile-nav ${isOpen ? 'active' : ''}`}>
-          {['Home', 'Features', 'How it Works', 'Contact Us', 'Login'].map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
-              className="mobile-nav-link"
-              onClick={() => setIsOpen(false)}
-            >
-              {item}
-            </a>
-          ))}
+          <ul className="mobile-nav-list">
+            {navItems.map((item) => (
+              <li key={item} className="mobile-nav-item">
+                <a
+                  href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
+                  className="mobile-nav-link"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </header>

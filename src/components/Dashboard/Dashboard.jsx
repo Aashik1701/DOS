@@ -320,7 +320,7 @@ const Dashboard = () => {
                 <Legend />
                 <Line type="monotone" dataKey="laundry" stroke="#3B82F6" />
                 <Line type="monotone" dataKey="shower" stroke="#10B981" />
-                <Line type="monotone" dataKey="sink" stroke="# F59E0B" />
+                <Line type="monotone" dataKey="sink" stroke="#F59E0B" />
               </LineChart>
             </ResponsiveContainer>
           </div>
