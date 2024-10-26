@@ -1,19 +1,23 @@
 import './App.css';
 import Header from './components/Header/Header';
-import Hero from './components/Pages/Hero/gg/Hero';
-import Dashboard from './components/Dashboard/Dashboard';
-import WaterQualityMap from './components/WaterQualityMap';
+//import Hero from './components/Pages/Hero/gg/Hero';
+//import Dashboard from './components/Dashboard/Dashboard';
+//import WaterQualityMap from './components/WaterQualityMap';
 import UploadData from './components/uploadData'; // Adjust the path as necessary
+import ControlPanel from './components/Dashboard/ControlPanel';
 
 function App() {
   return (
     <>
       <div>
         <Header />
+        <ControlPanel />
+        
         <UploadData /> {/* Use uppercase here */}
-        <WaterQualityMap />
-        <Dashboard />
-        <Hero />
+        
+
+        
+        
       </div>
     </>
   );

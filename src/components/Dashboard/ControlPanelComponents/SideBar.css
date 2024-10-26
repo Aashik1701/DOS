@@ -1,0 +1,59 @@
+.sidebar {
+    
+    height: 100vh; /* Full height */
+    background-color: #2c3e50; /* Dark background */
+    color: rgb(0, 0, 0); /* Text color */
+    overflow: hidden; /* Hide overflow */
+    transition: width 0.3s ease; /* Smooth transition for width */
+    position: fixed; /* Fixed position */
+    left: 0; /* Align to the left */
+    top: 50px; /* Align to the top */
+    z-index: 1000; /* Ensure it stays on top */
+}
+
+.hamburger {
+    background: none; /* No background */
+    border: none; /* No border */
+    color: white; /* Icon color */
+    font-size: 24px; /* Icon size */
+    cursor: pointer; /* Pointer cursor */
+    margin: 10px; /* Margin around the button */
+}
+
+ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+}
+
+li {
+    display: flex; /* Flexbox for alignment */
+    align-items: center; /* Center items vertically */
+    padding: 15px 20px; /* Padding for list items */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.9s; /* Smooth background transition */
+}
+
+li:hover {
+    color: #2c3e50;
+    background-color: #34495e; /* Darker background on hover */
+}
+
+.active {
+    background-color: #2980b9; /* Active section background */
+}
+
+.sidebar-text {
+    margin-left: 10px; /* Space between icon and text */
+    font-size: 16px; /* Text size */
+    display: inline-block; /* Inline block for spacing */
+    transition: opacity 0.3s; /* Smooth transition for opacity */
+}
+
+.sidebar:not([style*="width: 0px"]) .sidebar-text {
+    opacity: 1; /* Show text when sidebar is visible */
+}
+
+.sidebar[style*="width: 0px"] .sidebar-text {
+    opacity: 0; /* Hide text when sidebar is hidden */
+}
