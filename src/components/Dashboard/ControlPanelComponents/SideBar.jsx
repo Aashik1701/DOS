@@ -16,7 +16,7 @@ const Sidebar = ({ activeSection, setActiveSection, isSidebarVisible }) => {
             
             <ul>
                 <li className={activeSection === 'Dashboard' ? 'active' : ''}
-                    onClick={() => setActiveSection('Dashboard')}>
+                    onClick={() => setActiveSection('Dashboard','WaterQualityMap')}>
                     <FontAwesomeIcon icon={faUsers} />
                     <span className="sidebar-text">Dashboard</span>
                 </li>

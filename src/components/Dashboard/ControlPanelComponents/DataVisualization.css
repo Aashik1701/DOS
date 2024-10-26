@@ -1,0 +1,31 @@
+.data-visualization-section {
+    background-color: #f8f9fa; /* Light background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  .chart-container {
+    background-color: #fff; /* White chart background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-bottom: 20px; /* Space between chart and controls */
+  }
+  
+  .chart-controls {
+    /* Style your controls here (e.g., date pickers) */
+    display: flex;
+    gap: 10px;
+  }
+  
+  .recharts-text { /* Style the text elements inside the chart */
+    font-size: 14px;
+  }
+  
+  .recharts-tooltip-wrapper { /* Style the tooltip */
+    background-color: rgba(255, 255, 255, 0.9); 
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+  }

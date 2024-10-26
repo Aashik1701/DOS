@@ -1,12 +1,24 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import './NodeManagement.css';
 
 const NodeManagement = ({ nodes, setNodes }) => {
     const [newNode, setNewNode] = useState({ id: '', name: '', latitude: '', longitude: '', type: '' });
+    const [editingNode, setEditingNode] = useState(null);
 
     const handleAddNode = () => {
-        setNodes([...nodes, { ...newNode }]);
+        if (editingNode) {
+            setNodes(nodes.map(node => node.id === editingNode.id ? newNode : node));
+            setEditingNode(null);
+        } else {
+            setNodes([...nodes, { ...newNode }]);
+        }
         setNewNode({ id: '', name: '', latitude: '', longitude: '', type: '' });
+    };
+
+    const handleEditNode = (node) => {
+        setNewNode(node);
+        setEditingNode(node);
     };
 
     const handleDeleteNode = (id) => {
@@ -14,7 +26,7 @@ const NodeManagement = ({ nodes, setNodes }) => {
     };
 
     return (
-        <section>
+        <section className="node-management">
             <h2>Node Management</h2>
             <form onSubmit={(e) => { e.preventDefault(); handleAddNode(); }}>
                 <input
@@ -52,12 +64,13 @@ const NodeManagement = ({ nodes, setNodes }) => {
                     onChange={(e) => setNewNode({ ...newNode, type: e.target.value })}
                     required
                 />
-                <button type="submit">Add Node</button>
+                <button type="submit">{editingNode ? 'Save Changes' : 'Add Node'}</button>
             </form>
             <ul>
                 {nodes.map(node => (
                     <li key={node.id}>
                         {node.name} (ID: {node.id})
+                        <button onClick={() => handleEditNode(node)}>Edit</button>
                         <button onClick={() => handleDeleteNode(node.id)}>Delete</button>
                     </li>
                 ))}
@@ -65,6 +78,7 @@ const NodeManagement = ({ nodes, setNodes }) => {
         </section>
     );
 };
+
 NodeManagement.propTypes = {
     nodes: PropTypes.arrayOf(
         PropTypes.shape({
