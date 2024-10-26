@@ -1,5 +1,9 @@
 // HeroSection.jsx
 import './Hero.css';
+//import Spline from '@splinetool/react-spline';
+//<Spline scene="https://prod.spline.design/OGdSTxKdRdapWnso/scene.splinecode" />
+//<Spline scene="https://prod.spline.design/1T4HxLg1kDDjfcdU/scene.splinecode" />
+
 
 const Hero = () => {
   return (
