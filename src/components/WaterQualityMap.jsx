@@ -31,22 +31,23 @@ const WaterQualityMap = () => {
         <MapContainer center={[46.0, -65.0]} zoom={8} style={{ height: "600px", width: "100%" }}>
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                attribution=''
             />
-            {data.map(location => (
-                <Marker 
-                    key={location.MonitoringLocationID} 
-                    position={[location.MonitoringLocationLatitude, location.MonitoringLocationLongitude]} 
-                    icon={customIcon} // Use the custom icon here
-                >
-                    <Popup>
-                        <strong>{location.MonitoringLocationName}</strong><br />
-                        Salinity: {location.Salinity} ppth<br />
-                        Dissolved Oxygen: {location.Dissolved_Oxygen} mg/L<br />
-                        Total Coliform: {location.Total_Coliform} MPN<br />
-                    </Popup>
-                </Marker>
-            ))}
+            // src/components/WaterQualityMap.jsx
+{data.map((location, index) => (
+    <Marker 
+        key={`${location.MonitoringLocationID}-${index}`} // Make key unique
+        position={[location.MonitoringLocationLatitude, location.MonitoringLocationLongitude]} 
+        icon={customIcon}
+    >
+        <Popup>
+            <strong>{location.MonitoringLocationName}</strong><br />
+            Salinity: {location.Salinity} ppth<br />
+            Dissolved Oxygen: {location.Dissolved_Oxygen} mg/L<br />
+            Total Coliform: {location.Total_Coliform} MPN<br />
+        </Popup>
+    </Marker>
+))}
         </MapContainer>
     );
 };
