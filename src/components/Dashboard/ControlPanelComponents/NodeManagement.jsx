@@ -39,7 +39,7 @@ const NodeManagement = ({ nodes, setNodes }) => {
                     required
                 />
                 <input
-                    type="text "
+                    type="text"
                     placeholder="Longitude"
                     value={newNode.longitude}
                     onChange={(e) => setNewNode({ ...newNode, longitude: e.target.value })}
