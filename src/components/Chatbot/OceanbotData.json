@@ -168,6 +168,101 @@
         {
             "keywords": ["automation of tasks", "AI models", "predictive analytics"],
             "response": "AI models enable automation and predictive analytics, helping identify potential failures and optimize resource allocation. Would you like to know how AI is integrated for predictive insights?"
+        },
+        {
+            "keywords": ["node failures", "recovery", "system resilience"],
+            "response": "Node failures are common in harsh environments, and resilience is built through system redundancy and recovery techniques.",
+            "answer": "When a node fails, the distributed system uses redundancy to ensure data is still accessible. Checkpointing and consensus protocols are applied to restore the system to a previous stable state. Would you like to know more about recovery processes?"
+        },
+        {
+            "keywords": ["data synchronization", "consistency", "data accuracy"],
+            "response": "Data synchronization ensures consistency across nodes, which is essential for accurate data readings and reliable monitoring.",
+            "answer": "Synchronization methods, like using consensus protocols, help keep data consistent across different nodes. This minimizes the risk of data conflicts and ensures that all nodes are in agreement. Would you like details on specific synchronization methods?"
+        },
+        {
+            "keywords": ["weather forecasting", "environmental prediction", "data insights"],
+            "response": "Mooring buoy systems can contribute to weather forecasting by analyzing environmental data patterns.",
+            "answer": "Through AI and data processing, the system can identify patterns that contribute to predicting weather changes, such as temperature fluctuations or storm developments. Would you like to understand the data models used in weather forecasting?"
+        },
+        {
+            "keywords": ["remote software updates", "system upgrades", "version control"],
+            "response": "Remote software updates are essential for maintaining the latest features and security protocols on mooring buoys.",
+            "answer": "Version control ensures that updates are smoothly implemented, allowing new features and security patches to be deployed without requiring physical access to the buoys. Interested in learning how remote updates are handled securely?"
+        },
+        {
+            "keywords": ["marine ecosystem", "environmental impact", "data monitoring"],
+            "response": "Monitoring marine ecosystems is crucial for assessing environmental health and impact.",
+            "answer": "Sensors on mooring buoys collect data on parameters like oxygen levels, pH, and contaminants, providing insights into the health of the ecosystem. Would you like details on the specific environmental indicators tracked by these systems?"
+        },
+        {
+            "keywords": ["sensor failure", "data gaps", "recovery"],
+            "response": "Sensor failures can lead to data gaps, but distributed systems use redundancy to address this.",
+            "answer": "When a sensor fails, the system compensates by collecting data from neighboring sensors or relying on historical data to fill in gaps. Would you like to explore the methods used for handling sensor data gaps?"
+        },
+        {
+            "keywords": ["user training", "interface guidance", "control panels"],
+            "response": "Training users on the control interface of mooring buoys ensures effective monitoring and response.",
+            "answer": "The user interface is designed to be intuitive, but training covers essential controls, data interpretation, and troubleshooting to ensure users are fully equipped to manage the system. Would you like resources or a guide on using the interface?"
+        },
+        {
+            "keywords": ["system alerts", "anomaly detection", "alerts management"],
+            "response": "System alerts notify operators of anomalies or threshold breaches in the data.",
+            "answer": "The system uses predefined parameters to detect anomalies, such as sudden temperature changes, and automatically triggers alerts for user attention. Would you like more information on setting alert thresholds?"
+        },
+        {
+            "keywords": ["ocean pollution", "data collection", "environmental health"],
+            "response": "Monitoring ocean pollution is part of the mooring buoy’s data collection purpose.",
+            "answer": "Pollution sensors detect contaminants like nitrates and petroleum compounds, aiding in early detection of environmental hazards. Would you like to explore how these pollution indicators are measured and analyzed?"
+        },
+        {
+            "keywords": ["real-time updates", "system dashboard", "live data"],
+            "response": "Real-time data is accessible via the system dashboard, allowing for live monitoring of key parameters.",
+            "answer": "Operators can view live data streams from each sensor, including temperature, pressure, and salinity levels, helping them respond to changes immediately. Would you like guidance on customizing your data dashboard?"
+        },
+        {
+            "keywords": ["team collaboration", "multi-user access", "data sharing"],
+            "response": "Collaborative access allows multiple users to monitor and manage mooring buoy systems together.",
+            "answer": "The system supports multi-user access, enabling team members to collaborate on monitoring tasks and share insights seamlessly. Would you like information on setting up team access and permissions?"
+        },
+        {
+            "keywords": ["battery life", "energy-saving modes", "power management"],
+            "response": "Battery life is managed with energy-saving modes to ensure long-term operation in remote locations.",
+            "answer": "The system employs low-power modes during inactive periods and utilizes solar energy to recharge, ensuring sustained operation. Would you like advice on optimizing battery settings for your environment?"
+        },
+        {
+            "keywords": ["advanced sensors", "DNA biosensors", "biological monitoring"],
+            "response": "Advanced sensors like DNA biosensors allow for the detection of biological markers in marine environments.",
+            "answer": "These sensors help identify biological contaminants, such as specific bacteria, providing detailed environmental health data. Interested in understanding how DNA biosensors function and their applications in marine monitoring?"
+        },
+        {
+            "keywords": ["system performance", "efficiency metrics", "usage optimization"],
+            "response": "System performance metrics help optimize efficiency and highlight areas for improvement.",
+            "answer": "Metrics like data processing speed, sensor response times, and power usage are monitored to ensure efficient operation. Would you like insights into interpreting these performance metrics?"
+        },
+        {
+            "keywords": ["cross-system compatibility", "standardization", "data integration"],
+            "response": "Standardization across systems ensures compatibility and seamless data integration.",
+            "answer": "Mooring buoys adhere to data standards, enabling them to integrate smoothly with other systems and research platforms. Would you like to know more about the protocols used for compatibility and data exchange?"
+        },
+        {
+            "keywords": ["long-term deployment", "durability", "hardware maintenance"],
+            "response": "Long-term deployments require durable hardware and regular maintenance checks to ensure system longevity.",
+            "answer": "Materials resistant to saltwater corrosion are used, and remote diagnostics help identify maintenance needs. Interested in understanding hardware design for extended deployments?"
+        },
+        {
+            "keywords": ["ocean currents", "movement tracking", "drift analysis"],
+            "response": "Ocean buoys can track ocean currents and analyze drift patterns using GPS and movement sensors.",
+            "answer": "By recording position changes over time, buoys can provide valuable data on ocean currents and drift trends. Would you like more information on how ocean current data is collected and analyzed?"
+        },
+        {
+            "keywords": ["marine ecosystem health", "habitat monitoring", "biodiversity tracking"],
+            "response": "Monitoring the health of marine ecosystems and habitats provides data for biodiversity conservation.",
+            "answer": "The system collects data on key indicators of ecosystem health, helping to track changes in marine biodiversity. Would you like details on specific indicators used for habitat monitoring?"
+        },
+        {
+            "keywords": ["data verification", "quality assurance", "error detection"],
+            "response": "Data verification ensures accuracy and quality, preventing erroneous readings in the distributed system.",
+            "answer": "Methods like cross-referencing sensor data and calibration checks help maintain data integrity. Would you like to know about the specific error detection techniques used?"
         }
     ]
     
