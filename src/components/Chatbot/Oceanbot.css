@@ -1,5 +1,35 @@
-.ocean-bot-container {
-    width: 400px;
+.ocean-bot-wrapper-unique {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.chat-toggle-button-unique {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    background-color: #0891b2;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease;
+}
+
+.chat-toggle-button-unique:hover {
+    transform: scale(1.1);
+    background-color: #0e7490;
+}
+
+.ocean-bot-container-unique {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 380px;
     height: 600px;
     border-radius: 12px;
     background-color: #ffffff;
@@ -7,113 +37,151 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-  }
-  
-  .ocean-bot-header {
+    animation: slideInUnique 0.3s ease;
+}
+
+@keyframes slideInUnique {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ocean-bot-header-unique {
     background-color: #0891b2;
     color: white;
     padding: 16px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+}
+
+.header-left-unique {
+    display: flex;
+    align-items: center;
     gap: 12px;
-  }
-  
-  .ocean-bot-header h2 {
+}
+
+.ocean-bot-header-unique h2 {
     margin: 0;
     font-size: 1.25rem;
-  }
-  
-  .chat-messages {
+}
+
+.close-button-unique {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.close-button-unique:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.chat-messages-unique {
     flex: 1;
     overflow-y: auto;
     padding: 16px;
     display: flex;
     flex-direction: column;
     gap: 16px;
-  }
-  
-  .message {
+}
+
+.message-unique {
     display: flex;
     gap: 8px;
     align-items: flex-start;
     max-width: 80%;
     padding: 12px;
     border-radius: 12px;
-  }
-  
-  .message.user {
+}
+
+.message.user-unique {
     margin-left: auto;
     background-color: #0891b2;
     color: white;
-  }
-  
-  .message.bot {
+}
+
+.message.bot-unique {
     margin-right: auto;
     background-color: #f0f9ff;
     color: #0c4a6e;
-  }
-  
-  .message p {
+}
+
+.message-unique p {
     margin: 0;
     line-height: 1.5;
-  }
-  
-  .chat-input-form {
+}
+
+.chat-input-form-unique {
     padding: 16px;
     display: flex;
+    align-items: center;
     gap: 8px;
     background-color: #f8fafc;
     border-top: 1px solid #e2e8f0;
-  }
-  
-  .chat-input {
+}
+
+.chat-input-unique {
     flex: 1;
     padding: 12px;
     border: 1px solid #e2e8f0;
     border-radius: 8px;
     font-size: 1rem;
     outline: none;
-  }
-  
-  .chat-input:focus {
+}
+
+.chat-input-unique:focus {
     border-color: #0891b2;
-  }
-  
-  .send-button {
+}
+
+.chatsendbutton-unique {
+    width: 44px;
+    height: 44px;
     background-color: #0891b2;
     color: white;
     border: none;
     border-radius: 8px;
-    padding: 12px;
+    padding: 10px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background-color 0.2s;
-  }
-  
-  .send-button:hover {
+}
+
+.chatsendbutton-unique:hover {
     background-color: #0e7490;
-  }
-  
-  .username-form {
+}
+
+.username-form-unique {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 16px;
     padding: 32px;
     justify-content: center;
-  }
-  
-  .username-input {
+}
+
+.username-input-unique {
     padding: 12px;
     border: 1px solid #e2e8f0;
     border-radius: 8px;
     font-size: 1rem;
     outline: none;
-  }
-  
-  .submit-button {
+}
+
+.submit-Oceanbutton-unique {
     background-color: #0891b2;
     color: white;
     border: none;
@@ -122,26 +190,34 @@
     cursor: pointer;
     font-size: 1rem;
     transition: background-color 0.2s;
-  }
-  
-  .submit-button:hover {
+}
+
+.submit-Oceanbutton-unique:hover {
     background-color: #0e7490;
-  }
-  
-  /* Scrollbar styling */
-  .chat-messages::-webkit-scrollbar {
+}
+
+.chat-messages-unique::-webkit-scrollbar {
     width: 6px;
-  }
-  
-  .chat-messages::-webkit-scrollbar-track {
+}
+
+.chat-messages-unique::-webkit-scrollbar-track {
     background: #f1f1f1;
-  }
-  
-  .chat-messages::-webkit-scrollbar-thumb {
+}
+
+.chat-messages-unique::-webkit-scrollbar-thumb {
     background: #0891b2;
     border-radius: 3px;
-  }
-  
-  .chat-messages::-webkit-scrollbar-thumb:hover {
+}
+
+.chat-messages-unique::-webkit-scrollbar-thumb:hover {
     background: #0e7490;
-  }
+}
+
+@media (max-width: 480px) {
+    .ocean-bot-container-unique {
+        width: calc(100vw - 40px);
+        height: calc(100vh - 120px);
+        bottom: 80px;
+        right: 20px;
+    }
+}

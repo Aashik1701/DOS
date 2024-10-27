@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Send, Bot, User } from 'lucide-react';
+import { Send, Bot, User, X, MessageCircle } from 'lucide-react';
 import chatData from './OceanBotData.json';
 import './OceanBot.css';
 
@@ -8,6 +8,7 @@ const OceanBot = () => {
   const [inputMessage, setInputMessage] = useState('');
   const [userName, setUserName] = useState('');
   const [isInitial, setIsInitial] = useState(true);
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const chatEndRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -32,22 +33,10 @@ const OceanBot = () => {
 
   const findResponse = (userInput) => {
     const normalizedInput = userInput.toLowerCase();
-    
-    // First, check for exact matches
     const exactMatch = chatData.qa.find(item => 
       item.keywords.some(keyword => normalizedInput.includes(keyword.toLowerCase()))
     );
-    
-    if (exactMatch) return exactMatch.response;
-
-    // If no exact match, check for partial matches
-    const partialMatch = chatData.qa.find(item =>
-      item.keywords.some(keyword => 
-        normalizedInput.split(' ').some(word => word.includes(keyword.toLowerCase()))
-      )
-    );
-
-    return partialMatch ? partialMatch.response : chatData.defaultResponse;
+    return exactMatch ? exactMatch.response : chatData.defaultResponse;
   };
 
   const handleSendMessage = (e) => {
@@ -55,64 +44,78 @@ const OceanBot = () => {
     if (inputMessage.trim()) {
       const userMsg = { type: 'user', content: inputMessage };
       const botResponse = { type: 'bot', content: findResponse(inputMessage) };
-      
       setMessages(prev => [...prev, userMsg, botResponse]);
       setInputMessage('');
     }
   };
 
-  if (isInitial) {
-    return (
-      <div className="ocean-bot-container">
-        <div className="ocean-bot-header">
+  const toggleChat = () => {
+    setIsChatOpen(!isChatOpen);
+  };
+
+  const renderChatButton = () => (
+    <button className="chat-toggle-button-unique" onClick={toggleChat}>
+      <MessageCircle size={24} />
+    </button>
+  );
+
+  const renderChatWindow = () => (
+    <div className="ocean-bot-container-unique">
+      <div className="ocean-bot-header-unique">
+        <div className="header-left-unique">
           <Bot size={24} />
           <h2>OceanBot</h2>
         </div>
-        <form onSubmit={handleUserNameSubmit} className="username-form">
+        <button className="close-button-unique" onClick={toggleChat}>
+          <X size={20} />
+        </button>
+      </div>
+      
+      {isInitial ? (
+        <form onSubmit={handleUserNameSubmit} className="username-form-unique">
           <input
             type="text"
             placeholder="Enter your name to start..."
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
-            className="username-input"
+            className="username-input-unique"
           />
-          <button type="submit" className="submit-button">
+          <button type="submit" className="submit-Oceanbutton-unique">
             Start Chat
           </button>
         </form>
-      </div>
-    );
-  }
+      ) : (
+        <>
+          <div className="chat-messages-unique">
+            {messages.map((message, index) => (
+              <div key={index} className={`message-unique ${message.type}`}>
+                {message.type === 'bot' ? <Bot size={20} /> : <User  size={20} />}
+                <p>{message.content}</p>
+              </div>
+            ))}
+            <div ref={chatEndRef} />
+          </div>
+
+          <form onSubmit={handleSendMessage} className="chat-input-form-unique">
+            <input
+              type="text"
+              placeholder="Ask me about mooring buoy systems..."
+              value={inputMessage}
+              onChange={(e) => setInputMessage(e.target.value)}
+              className="chat-input-unique"
+            />
+            <button type="submit" className="chatsendbutton-unique">
+              <Send size={20} />
+            </button>
+          </form>
+        </>
+      )}
+    </div>
+  );
 
   return (
-    <div className="ocean-bot-container">
-      <div className="ocean-bot-header">
-        <Bot size={24} />
-        <h2>OceanBot</h2>
-      </div>
-      
-      <div className="chat-messages">
-        {messages.map((message, index) => (
-          <div key={index} className={`message ${message.type}`}>
-            {message.type === 'bot' ? <Bot size={20} /> : <User size={20} />}
-            <p>{message.content}</p>
-          </div>
-        ))}
-        <div ref={chatEndRef} />
-      </div>
-
-      <form onSubmit={handleSendMessage} className="chat-input-form">
-        <input
-          type="text"
-          placeholder="Ask me about mooring buoy systems..."
-          value={inputMessage}
-          onChange={(e) => setInputMessage(e.target.value)}
-          className="chat-input"
-        />
-        <button type="submit" className="send-button">
-          <Send size={20} />
-        </button>
-      </form>
+    <div className="ocean-bot-wrapper-unique">
+      {isChatOpen ? renderChatWindow() : renderChatButton()}
     </div>
   );
 };
