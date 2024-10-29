@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import card from './ui/cards.jsx'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import { AlertTriangle, Cloud, Tool, Card } from 'lucide-react';
 
