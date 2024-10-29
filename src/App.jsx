@@ -11,8 +11,10 @@ function App() {
     <>
       <div>
         <Header />
-        <ControlPanel />
         <Hero />
+        
+        <ControlPanel />
+        
         <WaterQualityMap />
         <OceanBot />
         <UploadData /> {/* Use uppercase here */}                
