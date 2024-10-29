@@ -8,6 +8,7 @@ import DataVisualization from './ControlPanelComponents/DataVisualization';
 import SystemSettings from './ControlPanelComponents/SystemSettings';
 import Dashboard from './Dashboard';
 import './ControlPanelComponents/ControlPanel.css';
+
 const ControlPanel = () => {
     const [nodes, setNodes] = useState([]);
     const [sensors, setSensors] = useState([]);

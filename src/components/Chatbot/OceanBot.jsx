@@ -1,3 +1,12 @@
+
+/**
+ * A chatbot component that provides information about distributed operating systems in mooring buoy environments.
+ * It renders a chat window with a header containing the bot's name and a close button.
+ * The chat window displays a list of messages, and has a form to submit new messages.
+ * The chatbot responds to user input based on keywords in a predefined dataset.
+ * The component also has a toggle button to show and hide the chat window.
+ */
+
 import { useState, useRef, useEffect } from 'react';
 import { Send, Bot, User, X, MessageCircle } from 'lucide-react';
 import chatData from './OceanBotData.json';

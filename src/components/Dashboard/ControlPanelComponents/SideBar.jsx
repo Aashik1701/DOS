@@ -1,4 +1,3 @@
-import './ControlPanel.css';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
@@ -9,7 +8,6 @@ import {
     faUsers, 
     faSlidersH,
 } from '@fortawesome/free-solid-svg-icons';
-
 const Sidebar = ({ activeSection, setActiveSection, isSidebarVisible }) => {
     return (
         <div className="sidebar" style={{ width: isSidebarVisible ? '100px' : '0px' }}>
